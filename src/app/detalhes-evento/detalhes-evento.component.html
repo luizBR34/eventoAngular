@@ -1,0 +1,65 @@
+<div class="container detalhesEvento"> 
+	<h5 i18n="@@tituloDetalhesEvento">Detalhes do Evento</h5>
+	<div class ="row">
+		<p><span i18n="@@nomeDetalhesEvento">Nome</span>: <span> {{event.name}} </span></p>
+		<p><span i18n="@@localDetalhesEvento">Local</span>: <span> {{event.city}} </span></p>
+		<p><span i18n="@@dataDetalhesEvento">Data</span>: <span> {{event.date}} </span></p>
+		<p><span i18n="@@horarioDetalhesEvento">Horario</span>: <span> {{event.time}} </span></p>
+	</div>
+</div>
+
+<div class="container formConvidado">
+	<form novalidate #cadastraConvidadoForm="ngForm" (ngSubmit)="adicionar()">
+
+		<mat-form-field>
+			<input matInput i18n-placeholder="@@rotuloRGDetalhesEvento" placeholder="RG" type="text" [(ngModel)]="convidado.id" name="rg" #rg="ngModel" required>
+			<mat-error i18n="@@msgErrorRGDetalhesEvento" *ngIf="rg.errors?.required">RG é obrigatório!</mat-error>
+		</mat-form-field>
+
+		<mat-form-field>
+			<input matInput i18n-placeholder="@@rotuloNomeDetalhesEvento" placeholder="Nome" type="text" [(ngModel)]="convidado.guestName" name="nomeConvidado" #nomeConvidado="ngModel" required>
+			<mat-error i18n="@@msgErrorNomeDetalhesEvento" *ngIf="nomeConvidado.errors?.required">Nome é obrigatório!</mat-error>
+		</mat-form-field>
+
+		<button i18n="@@butaoAdicionarDetalhesEvento" mat-button type="submit" class="waves-effect waves-light btn detalhesAdicionar" [disabled]="cadastraConvidadoForm.form.invalid">Adicionar</button>
+	</form>
+</div>
+	
+<table class="container tabelaConvidado">
+	<thead>
+		<tr>
+		<th i18n="@@nomeConvidadoDetalhesEvento">Nome</th>
+		<th i18n="@@rgConvidadoDetalhesEvento">RG</th>
+		<th i18n="@@deletarConvidadoDetalhesEvento">Deletar</th>
+		</tr>
+	</thead>
+		
+	<tbody>
+      <tr *ngFor="let convidado of convidados">
+			<td><span> {{convidado.guestName}} </span></td>
+			<td><span> {{convidado.id}} </span></td>
+			<td><a [routerLink]="['/detalhesEvento', convidado.evento.code ]" routerLinkActive='active' (click)="deletar(convidado)"><i class="material-icons left">delete</i></a></td>
+	  </tr>
+	</tbody>
+</table> 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,29 @@
+{
+  "eventos": [
+    {
+      "code": 1,
+      "name": "Primeiro Evento",
+      "city": "São Paulo",
+      "date": "2019-01-18",
+      "time": "11:55"
+    },
+    {
+      "id": 2,
+      "code": 2,
+      "name": "Segundo Evento",
+      "city": "Rio de JAneiro",
+      "date": "2015-03-18",
+      "time": "15:35"
+    },
+    {
+      "username": "Teste",
+      "password": "Senha",
+      "id": 3
+    },
+    {
+      "username": "AAAAAA",
+      "password": "BBBBBBBBB",
+      "id": 4
+    }
+  ]
+}

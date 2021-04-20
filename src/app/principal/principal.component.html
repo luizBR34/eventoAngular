@@ -1,0 +1,26 @@
+<div class="relativo">
+<table class="container">
+	<thead>
+	<tr>
+		<th i18n="@@colunaNomeEvento">Nome</th>
+		<th i18n="@@colunaLocalEvento">Local</th>
+		<th i18n="@@colunaDataEvento">Data</th>
+		<th i18n="@@colunaHorarioEvento">Horario</th>
+		<th i18n="@@colunaDeletarEvento">Deletar</th>
+	</tr>
+	</thead>
+	
+	<p *ngIf="eventos.length < 1 && !isFetching">No posts available!</p>
+	<tbody>
+  <tr *ngFor="let evento of eventos">
+    <td><a [routerLink]="['/detalhesEvento', evento.code ]" routerLinkActive='active'><span> {{evento.name}} </span></a></td>
+		<td><span> {{evento.city}} </span></td>
+		<td><span> {{evento.date}} </span></td>
+    <td><span> {{evento.time}} </span></td>
+    <td><a routerLink="/eventos" routerLinkActive='active' (click)="onDeleteEvento(evento.code)"><i class="material-icons left">delete</i></a></td>
+	</tr>
+	</tbody>
+	<p *ngIf="isFetching">Loading...</p>
+	
+</table>
+</div>

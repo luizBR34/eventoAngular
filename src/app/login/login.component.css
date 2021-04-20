@@ -1,0 +1,40 @@
+fieldset {
+    padding: .35em .75em .625em !important;
+}
+
+.full-width {
+    width: 95%
+}
+
+.half-width {
+    width: 45%
+}
+
+.form-size {
+    width: 75%
+}
+
+
+.margem-butao {
+    margin-left: 2.5rem !important;
+    margin-bottom: 1rem;
+}
+
+
+.flex-spacer {
+  flex: 1 1 auto;
+}
+
+.mat-dialog-actions .mat-button+.mat-button {
+    margin-left: 4rem;
+}
+
+.tp-section {
+    display: flex;
+    align-content: center;
+    align-items: center;
+    height: 60px;
+ }
+ .tp-margin {
+    margin: 0 10px;
+ }

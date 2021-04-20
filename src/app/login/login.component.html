@@ -1,0 +1,66 @@
+
+<div class="absoluto">
+
+<fieldset>
+<legend i18n="@@tituloDialogoLogin">{{description}}</legend>
+    
+<mat-dialog-content [formGroup]="loginFormulario" #lform="ngForm">
+  <p>
+    <mat-form-field class="full-width">
+        <input matInput 
+               formControlName="login"
+               type="text"
+               i18n-placeholder="@@rotuloUsuarioLogin"
+               placeholder="Usuário:"
+               required>
+        <mat-error i18n="@@msgErrorUsuarioLogin" *ngIf="f.login.errors?.required && f.login.touched">Usuário é obrigatório!</mat-error>
+    </mat-form-field>
+</p>
+
+<p>
+    <mat-form-field class="full-width">
+        <input matInput 
+                formControlName="senha"
+                type="text"
+                i18n-placeholder="@@rotuloSenhaLogin"
+                placeholder="Senha:"
+                required>
+        <mat-error i18n="@@msgErrorSenhaLogin" *ngIf="f.senha.errors?.required && f.senha.touched">Senha é obrigatória!</mat-error>
+    </mat-form-field>
+</p>
+
+    <section class = "tp-section">
+        <mat-checkbox id="checkRemember" class ="tp-margin" formControlName="checkRemember">Remember-Me</mat-checkbox>
+     </section>  
+
+</mat-dialog-content>
+
+<mat-dialog-actions>
+
+
+    <div class="row">
+        <div class="cols-xs-12">
+                <button i18n="@@butaoLogin" type="submit" mat-raised-button class="waves-effect waves-light btn margem-butao" (click)="logar()" [disabled]="lform.form.invalid">Logar</button>
+                <button i18n="@@butaoCadastrarUser" mat-raised-button class="waves-effect waves-light btn margem-butao" (click)="cadastrar()">Cadastrar</button>
+        </div>
+    </div>
+
+    <div class="row">
+            <div class="cols-xs-12">
+                <button i18n="@@butaoLogarComGoole" mat-raised-button class="waves-effect waves-light btn margem-butao" (click)="logarComGoogle()">Logar com Google</button>
+                <button i18n="@@butaoLogarComEventoAS" mat-raised-button class="waves-effect waves-light btn margem-butao" (click)="logarComEventoAS()">Logar com EventoAS</button>
+        </div>
+    </div>
+
+
+
+</mat-dialog-actions>
+
+</fieldset>
+
+</div>
+
+
+
+
+

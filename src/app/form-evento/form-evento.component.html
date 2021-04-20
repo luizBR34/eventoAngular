@@ -1,0 +1,35 @@
+<div class="container formEvento">
+
+  <form novalidate #eventoForm="ngForm" (ngSubmit)="onSubmit()" class="container">
+
+    <mat-form-field>
+      <input matInput i18n-placeholder="@@rotuloNomeCadastroEvento" placeholder="Nome" type="text" [(ngModel)]="evento.name" name="nome" #nome="ngModel" required>
+      <mat-error i18n="@@msgErrorNomeCadastroEvento" *ngIf="nome.errors?.required">Nome é obrigatório!</mat-error>
+    </mat-form-field>
+
+    <div class="row">
+      <div class="input-field col s6">
+        <mat-form-field>
+            <input matInput i18n-placeholder="@@rotuloLocalCadastroEvento" placeholder="Local" type="text" [(ngModel)]="evento.city" name="local" #local="ngModel" required>
+            <mat-error i18n="@@msgErrorLocalCadastroEvento" *ngIf="local.errors?.required">Local é obrigatório!</mat-error>
+        </mat-form-field>
+      </div>
+      
+      <div class="input-field col s3"> 
+          <mat-form-field class="ajuste-alinhamento">
+              <input matInput i18n-placeholder="@@rotuloDataCadastroEvento" placeholder="Data" type="date" [(ngModel)]="evento.date" name="data" #data="ngModel" required>
+              <mat-error i18n="@@msgErrorDataCadastroEvento" *ngIf="data.errors?.required">Data é obrigatório!</mat-error>
+          </mat-form-field>
+      </div>
+
+      <div class="input-field col s3"> 
+        <mat-form-field class="ajuste-alinhamento">
+            <input matInput i18n-placeholder="@@rotuloHorarioCadastroEvento" placeholder="Horário" type="datetime" [(ngModel)]="evento.time" name="horario" #horario="ngModel" required>
+            <mat-error i18n="@@msgErrorHorarioCadastroEvento" *ngIf="horario.errors?.required">Horario é obrigatório!</mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <button i18n="@@butaoSalvarCadastroEvento" mat-button type="submit" class="waves-effect waves-light btn" [disabled]="eventoForm.form.invalid">Salvar</button>
+  </form>
+</div>

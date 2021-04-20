@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file source-language="en" datatype="plaintext" original="ng2.template">
+    <body>
+      <trans-unit id="logoHeader" datatype="html">
+        <source>Sistema de Cadastramento de Eventos</source>
+		<target>Sistema de Cadastramento de Eventos</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/header/header.component.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="comboLinguas" datatype="html">
+        <source>Mudar Lingua</source>
+		<target>Mudar Lingua</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/header/header.component.html</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ola" datatype="html">
+        <source>Olá </source>
+		<target>Olá</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/header/header.component.html</context>
+          <context context-type="linenumber">16</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="visitante" datatype="html">
+        <source>Visitante</source>
+		<target>Visitante</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/header/header.component.html</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="linkDeslogar" datatype="html">
+        <source>Sair</source>
+		<target>Sair</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/header/header.component.html</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="butaoCadastrarEvento" datatype="html">
+        <source>Cadastrar Evento</source>
+		<target>Cadastrar Evento</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/header/header.component.html</context>
+          <context context-type="linenumber">21</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="tituloDialogoLogin" datatype="html">
+        <source><x id="INTERPOLATION" equiv-text="{{description}}"/></source>
+		<target></target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/login/login.component.html</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="rotuloUsuarioLogin" datatype="html">
+        <source>Usuário:</source>
+		<target>Usuário:</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/login/login.component.html</context>
+          <context context-type="linenumber">14</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="msgErrorUsuarioLogin" datatype="html">
+        <source>Usuário é obrigatório!</source>
+		<target>Usuário é obrigatório!</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/login/login.component.html</context>
+          <context context-type="linenumber">16</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="rotuloSenhaLogin" datatype="html">
+        <source>Senha:</source>
+		<target>Senha:</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/login/login.component.html</context>
+          <context context-type="linenumber">26</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="msgErrorSenhaLogin" datatype="html">
+        <source>Senha é obrigatória!</source>
+		<target>Senha é obrigatória!</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/login/login.component.html</context>
+          <context context-type="linenumber">28</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="butaoLogin" datatype="html">
+        <source>Logar</source>
+		<target>Logar</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/login/login.component.html</context>
+          <context context-type="linenumber">39</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="butaoCadastrarUser" datatype="html">
+        <source>Cadastrar</source>
+		<target>Cadastrar</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/login/login.component.html</context>
+          <context context-type="linenumber">40</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="butaoLogarComGoole" datatype="html">
+        <source>Logar com Google</source>
+		<target>Logar com Google</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/login/login.component.html</context>
+          <context context-type="linenumber">42</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="butaoLogarComEventoAS" datatype="html">
+        <source>Logar com EventoAS</source>
+		<target>Logar com EventoAS</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/login/login.component.html</context>
+          <context context-type="linenumber">43</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="colunaNomeEvento" datatype="html">
+        <source>Nome</source>
+		<target>Nome</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/principal/principal.component.html</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="colunaLocalEvento" datatype="html">
+        <source>Local</source>
+		<target>Local</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/principal/principal.component.html</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="colunaDataEvento" datatype="html">
+        <source>Data</source>
+		<target>Data</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/principal/principal.component.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="colunaHorarioEvento" datatype="html">
+        <source>Horario</source>
+		<target>Horario</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/principal/principal.component.html</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="colunaDeletarEvento" datatype="html">
+        <source>Deletar</source>
+		<target>Deletar</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/principal/principal.component.html</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="tituloDetalhesEvento" datatype="html">
+        <source>Detalhes do Evento</source>
+		<target>Detalhes do Evento</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/detalhes-evento/detalhes-evento.component.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="nomeDetalhesEvento" datatype="html">
+        <source>Nome</source>
+		<target>Nome</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/detalhes-evento/detalhes-evento.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="localDetalhesEvento" datatype="html">
+        <source>Local</source>
+		<target>Local</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/detalhes-evento/detalhes-evento.component.html</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="dataDetalhesEvento" datatype="html">
+        <source>Data</source>
+		<target>Data</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/detalhes-evento/detalhes-evento.component.html</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="horarioDetalhesEvento" datatype="html">
+        <source>Horario</source>
+		<target>Horario</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/detalhes-evento/detalhes-evento.component.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="rotuloRGDetalhesEvento" datatype="html">
+        <source>RG</source>
+		<target>RG</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/detalhes-evento/detalhes-evento.component.html</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="msgErrorRGDetalhesEvento" datatype="html">
+        <source>RG é obrigatório!</source>
+		<target>RG é obrigatório!</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/detalhes-evento/detalhes-evento.component.html</context>
+          <context context-type="linenumber">16</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="rotuloNomeDetalhesEvento" datatype="html">
+        <source>Nome</source>
+		<target>Nome</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/detalhes-evento/detalhes-evento.component.html</context>
+          <context context-type="linenumber">20</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="msgErrorNomeDetalhesEvento" datatype="html">
+        <source>Nome é obrigatório!</source>
+		<target>Nome é obrigatório!</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/detalhes-evento/detalhes-evento.component.html</context>
+          <context context-type="linenumber">21</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="butaoAdicionarDetalhesEvento" datatype="html">
+        <source>Adicionar</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/detalhes-evento/detalhes-evento.component.html</context>
+          <context context-type="linenumber">24</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="nomeConvidadoDetalhesEvento" datatype="html">
+        <source>Nome</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/detalhes-evento/detalhes-evento.component.html</context>
+          <context context-type="linenumber">31</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="rgConvidadoDetalhesEvento" datatype="html">
+        <source>RG</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/detalhes-evento/detalhes-evento.component.html</context>
+          <context context-type="linenumber">32</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="deletarConvidadoDetalhesEvento" datatype="html">
+        <source>Deletar</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/detalhes-evento/detalhes-evento.component.html</context>
+          <context context-type="linenumber">33</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="rotuloNomeCadastroEvento" datatype="html">
+        <source>Nome</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/form-evento/form-evento.component.html</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="msgErrorNomeCadastroEvento" datatype="html">
+        <source>Nome é obrigatório!</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/form-evento/form-evento.component.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="rotuloLocalCadastroEvento" datatype="html">
+        <source>Local</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/form-evento/form-evento.component.html</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="msgErrorLocalCadastroEvento" datatype="html">
+        <source>Local é obrigatório!</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/form-evento/form-evento.component.html</context>
+          <context context-type="linenumber">14</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="rotuloDataCadastroEvento" datatype="html">
+        <source>Data</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/form-evento/form-evento.component.html</context>
+          <context context-type="linenumber">20</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="msgErrorDataCadastroEvento" datatype="html">
+        <source>Data é obrigatório!</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/form-evento/form-evento.component.html</context>
+          <context context-type="linenumber">21</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="rotuloHorarioCadastroEvento" datatype="html">
+        <source>Horário</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/form-evento/form-evento.component.html</context>
+          <context context-type="linenumber">27</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="msgErrorHorarioCadastroEvento" datatype="html">
+        <source>Horario é obrigatório!</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/form-evento/form-evento.component.html</context>
+          <context context-type="linenumber">28</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="butaoSalvarCadastroEvento" datatype="html">
+        <source>Salvar</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/form-evento/form-evento.component.html</context>
+          <context context-type="linenumber">33</context>
+        </context-group>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
