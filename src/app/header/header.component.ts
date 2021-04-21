@@ -14,21 +14,20 @@ export class HeaderComponent implements OnInit {
   usuarioLogado: Usuario;
 
   constructor(private router: Router,
-    private service: BackServiceService) {
-      this.atualizaListaUsuarios(); 
-    }
+    private service: BackServiceService) { }
 
 
 atualizaListaUsuarios() {
-  setTimeout (() => {
     this.service.getUsuario()
-    .subscribe((usuario) => this.usuarioLogado = usuario,
+    .subscribe(usuario => { 
+      console.log(usuario);
+      this.usuarioLogado = usuario},
     msgError => this.msgError = <any>msgError);
-  }, 500);
 }
 
 
   ngOnInit() {
+    this.atualizaListaUsuarios();
   }
 
   openFormCadastraEvento() {

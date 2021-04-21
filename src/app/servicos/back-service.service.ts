@@ -54,7 +54,7 @@ export class BackServiceService {
 getUsuario(): Observable<Usuario> {
   const url = `${baseURL}/loggedUser/`;
   return this.http.get<Usuario>(url)
-  .pipe(catchError(this.ProcessHTTPMsgService.handleError)); 
+  .pipe(catchError(this.ProcessHTTPMsgService.handleError));
 }
 
 
@@ -68,7 +68,7 @@ getUsuario(): Observable<Usuario> {
         eventList.push(responseData[key])
       }
       return eventList;
-    }))
+    }));
     //.pipe(catchError(this.ProcessHTTPMsgService.handleError));
   }
 

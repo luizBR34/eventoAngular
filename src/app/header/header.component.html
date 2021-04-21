@@ -1,6 +1,6 @@
 <nav class="menu">
   <div class="nav-wrapper">
-      
+
 <table id="posicionamentoHeader">
   <tbody>
   <tr>
@@ -13,9 +13,9 @@
           <option value="br">Portugues</option>
       </select>
     </td>
-  <td style="width: 170px;text-align: right;"><span i18n="@@ola" style="font-size: 1rem;">Olá </span><span *ngIf="usuarioLogado; else elseBlock" style="font-size: 1rem;">{{usuarioLogado}}</span></td>
+  <td style="width: 170px;text-align: right;"><span i18n="@@ola" style="font-size: 1rem;">Olá </span><span *ngIf="usuarioLogado; else elseBlock" style="font-size: 1rem;">{{usuarioLogado.userName}}</span></td>
                                                                <ng-template i18n="@@visitante" #elseBlock>Visitante</ng-template>
-  <td style="width: 0px;text-align: center;"><a i18n="@@linkDeslogar" href="/logout" style="font-size: 1rem;">Sair</a></td>
+  <td style="width: 0px;text-align: center;"><a i18n="@@linkDeslogar" href="https://localhost:8443/myapp/logout" style="font-size: 1rem;">Sair</a></td>
 
   <td style="width: 200px;">
         <ul id="nav-mobile" class="right hide-on-med-and-down">
@@ -28,3 +28,4 @@
 
   </div>
 </nav>
+

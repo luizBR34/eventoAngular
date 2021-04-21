@@ -1,3 +1,5 @@
+import { Role } from '../models/role';
+
 export class Usuario {
 
     id: number;
@@ -6,4 +8,5 @@ export class Usuario {
     firstName: string;
     lastName: string;
     email: string;
+    roles: Role[] = [];
 }

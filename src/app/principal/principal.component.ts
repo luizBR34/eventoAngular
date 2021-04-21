@@ -27,11 +27,14 @@ export class PrincipalComponent implements OnInit {
 
 
     atualizaListaEventos() {
-      setTimeout (() => {
-        this.service.getEventos()
-        .subscribe((eventos) => this.eventos = eventos,
-        msgError => this.msgError = <any>msgError);
-      }, 500);
+
+      this.isFetching = true;
+
+      this.service.getEventos()
+      .subscribe(eventsReceived => {
+        this.isFetching = false;
+        this.eventos = eventsReceived
+      }, msgError => this.msgError = <any>msgError);
     }
 
 
@@ -43,13 +46,7 @@ export class PrincipalComponent implements OnInit {
         this.login = params.login;
       });
 
-    this.isFetching = true;
-
-    this.service.getEventos()
-    .subscribe(eventsReceived => {
-      this.isFetching = false;
-      this.eventos = eventsReceived
-    }, msgError => this.msgError = <any>msgError);
+    this.atualizaListaEventos();
 
       if (this.login) {
         this.openLoginForm();
