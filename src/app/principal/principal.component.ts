@@ -4,7 +4,6 @@ import { Evento } from '../models/evento';
 
 import { MatDialog } from '@angular/material'; // --> USADO PARA DIALOGO
 import { LoginComponent } from '../login/login.component';// --> USADO PARA DIALOGO
-import { ActivatedRoute } from '@angular/router';
 import { dialogConfig } from '../shared/dialogConfig';
 
 @Component({
@@ -15,14 +14,13 @@ import { dialogConfig } from '../shared/dialogConfig';
 export class PrincipalComponent implements OnInit {
 
   eventos: Evento[] = [];
-  msgError: string;
-  login: boolean;
+  msgError = null;
+  login: boolean = null;
   isFetching = false;
 
   navigationSubscription;
 
   constructor(private service: BackServiceService,
-    private rota: ActivatedRoute,
     private dialog: MatDialog) { }
 
 
@@ -34,23 +32,22 @@ export class PrincipalComponent implements OnInit {
       .subscribe(eventsReceived => {
         this.isFetching = false;
         this.eventos = eventsReceived
-      }, msgError => this.msgError = <any>msgError);
+      }, errorResponse => { 
+        this.isFetching = false;
+        this.msgError = errorResponse 
+      });
     }
 
 
   
   ngOnInit() {
 
-    this.rota.queryParams
-      .subscribe(params => {
-        this.login = params.login;
-      });
-
     this.atualizaListaEventos();
+  }
 
-      if (this.login) {
-        this.openLoginForm();
-      }
+
+  onHandleError() {
+    this.msgError = null;
   }
 
 

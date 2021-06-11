@@ -1,3 +1,5 @@
+<app-header></app-header>
+
 <div class="relativo">
 <table class="container">
 	<thead>
@@ -20,7 +22,11 @@
     <td><a routerLink="/eventos" routerLinkActive='active' (click)="onDeleteEvento(evento.code)"><i class="material-icons left">delete</i></a></td>
 	</tr>
 	</tbody>
-	<p *ngIf="isFetching">Loading...</p>
-	
+	<p *ngIf="isFetching && !msgError">Loading...</p>
+	<div class="alert alert-danger" *ngIf="msgError">
+		<h3>An Error Occurred!</h3>
+		<p>{{ msgError }}</p>
+		<button class="btn btn-danger" (click)="onHandleError()">Okay</button>
+	</div>
 </table>
 </div>

@@ -5,7 +5,7 @@
   <tbody>
   <tr>
   <td style="width: 40%;"><a i18n="@@logoHeader" href="#" class="brand-logo">Sistema de Cadastramento de Eventos</a></td>
-  <td style="width: 200px;text-align: center;padding-left: 3rem;"><span i18n="@@comboLinguas" style="font-weight: bold;font-size: 0.9rem;">Mudar Lingua</span>:</td>
+  <td style="width: 200px;text-align: center;padding-left: 3rem;"><span i18n="@@comboLinguas" style="font-weight: bold;font-size: 1.3rem;">Mudar Lingua</span>:</td>
     <td>
       <select id="locais">
           <option value=""></option>
@@ -13,9 +13,9 @@
           <option value="br">Portugues</option>
       </select>
     </td>
-  <td style="width: 170px;text-align: right;"><span i18n="@@ola" style="font-size: 1rem;">Olá </span><span *ngIf="usuarioLogado; else elseBlock" style="font-size: 1rem;">{{usuarioLogado.userName}}</span></td>
+  <td style="width: 170px;text-align: right;"><span i18n="@@ola" style="font-size: 2rem;">Olá </span><span *ngIf="usuarioLogado; else elseBlock" style="font-size: 2rem;">{{usuarioLogado.userName}}</span></td>
                                                                <ng-template i18n="@@visitante" #elseBlock>Visitante</ng-template>
-  <td style="width: 0px;text-align: center;"><a i18n="@@linkDeslogar" href="https://localhost:8443/myapp/logout" style="font-size: 1rem;">Sair</a></td>
+  <td style="width: 0px;text-align: center;"><a i18n="@@linkDeslogar" href="https://localhost:8443/myapp/logout" style="font-size: 1.5rem;">Sair</a></td>
 
   <td style="width: 200px;">
         <ul id="nav-mobile" class="right hide-on-med-and-down">

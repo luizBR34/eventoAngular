@@ -17,9 +17,10 @@ label {
 	position: absolute;
 	background-color: white;
     left: 40%;
-    width: 22rem;
-    height: 26rem;
-    top: 10rem;
+    width: 30rem;
+    height: 46rem;
+	top: 15rem;
+	border: 0.2rem solid lightskyblue;
   }
 
 
@@ -110,7 +111,7 @@ input[type=datetime]:not(.browser-default) {
 
 .brand-logo {
     position: relative !important;
-    font-size: 1.8rem !important;
+    font-size: 2.8rem !important;
     font-weight: bold;
 }
 

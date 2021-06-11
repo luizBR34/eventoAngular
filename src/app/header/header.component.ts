@@ -10,7 +10,7 @@ import { Usuario } from '../models/usuario';
 })
 export class HeaderComponent implements OnInit {
 
-  msgError: string;
+  msgError = null;
   usuarioLogado: Usuario;
 
   constructor(private router: Router,
@@ -21,8 +21,12 @@ atualizaListaUsuarios() {
     this.service.getUsuario()
     .subscribe(usuario => { 
       console.log(usuario);
-      this.usuarioLogado = usuario},
-    msgError => this.msgError = <any>msgError);
+      this.usuarioLogado = usuario}, 
+      errorResponse => { 
+        this.msgError = errorResponse.message;
+        console.log(errorResponse);
+      }
+    );
 }
 
 

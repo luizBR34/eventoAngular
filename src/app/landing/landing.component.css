@@ -1,0 +1,40 @@
+.jumbotron {
+    background-color: #1e94f4;
+    color: #fff;
+    padding: 100px 25px;
+}
+
+.container-fluid {
+    padding: 60px 50px;
+}
+
+.bg-grey {
+    background-color: #f6f6f6;
+}
+
+.landing_separator {
+    border-right: 3rem solid transparent;
+}
+
+.logo-small {
+    color: #1e94f4;
+    font-size: 50px;
+  }
+
+.logo {
+    color: #1e94f4;
+    font-size: 200px;
+  }
+
+  .logo_font {
+    color: #1e94f4;
+    font-size: 25px;
+    font-weight: bold;
+  }
+
+  @media screen and (max-width: 768px) {
+    .col-sm-4 {
+      text-align: center;
+      margin: 25px 0;
+    }
+  }

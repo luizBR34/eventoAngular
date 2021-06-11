@@ -10,19 +10,19 @@ export class ProcessHTTPMsgService {
   constructor() { }
 
   public handleError(error: HttpErrorResponse | any) {
-    let errMsg: string;
+    let errorMessage: string;
 
     if (error.error instanceof ErrorEvent) {
 
-      errMsg = error.error.message;
-      console.error('Ocorreu um erro no cliente: ', errMsg);
+      errorMessage = `An Error occurred on client side: ${error.error.message}`;
+      console.log(errorMessage);
 
     } else {
 
-        errMsg = `${error.status}`;
-        console.error('Ocorreu um erro na resposta do servidor: ', errMsg);
+        errorMessage = `Error Code: ${error.status}\n Message: ${error.message}`;
+        console.log(errorMessage);
     }
 
-    return throwError(errMsg);
+    return throwError(errorMessage);
   }
 }

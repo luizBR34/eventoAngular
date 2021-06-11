@@ -29,7 +29,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select'; //Usado no formulário reativo
 import { MatSlideToggleModule } from '@angular/material/slide-toggle'; //Usado no formulário reativo
 
-import { FlexLayoutModule } from '@angular/flex-layout'; // --> USADO PARA DIALOGO
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { LandingComponent } from './landing/landing.component'; 
 
 
 @NgModule({
@@ -39,7 +40,8 @@ import { FlexLayoutModule } from '@angular/flex-layout'; // --> USADO PARA DIALO
     PrincipalComponent,
     DetalhesEventoComponent,
     FormEventoComponent,
-    LoginComponent
+    LoginComponent,
+    LandingComponent
   ],
   imports: [
     BrowserModule,

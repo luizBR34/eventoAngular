@@ -3,6 +3,7 @@
 
 <fieldset>
 <legend i18n="@@tituloDialogoLogin">{{description}}</legend>
+<div class="alert alert-error" *ngIf="msgError">Usuario e Senha Invalidos.</div>
     
 <mat-dialog-content [formGroup]="loginFormulario" #lform="ngForm">
   <p>
@@ -41,7 +42,7 @@
     <div class="row">
         <div class="cols-xs-12">
                 <button i18n="@@butaoLogin" type="submit" mat-raised-button class="waves-effect waves-light btn margem-butao" (click)="logar()" [disabled]="lform.form.invalid">Logar</button>
-                <button i18n="@@butaoCadastrarUser" mat-raised-button class="waves-effect waves-light btn margem-butao" (click)="cadastrar()">Cadastrar</button>
+                <button i18n="@@butaoCancelar" mat-raised-button class="waves-effect waves-light btn margem-butao" (click)="cancelar()">Cancelar</button>
         </div>
     </div>
 
@@ -51,7 +52,6 @@
                 <button i18n="@@butaoLogarComEventoAS" mat-raised-button class="waves-effect waves-light btn margem-butao" (click)="logarComEventoAS()">Logar com EventoAS</button>
         </div>
     </div>
-
 
 
 </mat-dialog-actions>

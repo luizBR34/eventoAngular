@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BackServiceService } from '../servicos/back-service.service';
 import { Usuario } from '../models/usuario';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -15,8 +16,9 @@ export class LoginComponent implements OnInit {
   loginFormulario: FormGroup;
   user: Usuario;
   description: string;
-  msgError: string;
+  msgError = null;
   statusLogin: boolean;
+  private errorSub: Subscription;
   @ViewChild('lform') loginFormDirective; //Acessa o formulario do template em HTML
 
 
@@ -31,6 +33,10 @@ export class LoginComponent implements OnInit {
 
     ngOnInit() { 
       this.user = new Usuario();
+
+      this.errorSub = this.service.error.subscribe(errorMessage => {
+        this.msgError = errorMessage;
+      });
     }
 
 
@@ -52,23 +58,29 @@ export class LoginComponent implements OnInit {
       this.user.password = this.loginFormulario.get('senha').value;
 
       this.service.postLogaUsuario(this.user)
-      .subscribe(status => this.statusLogin = status,
-        msgError => this.msgError = <any>msgError);
+      .subscribe(() => {
+        this.msgError = null;
+      }, errorResponse => { 
+        this.msgError = errorResponse.message;
+        console.log(errorResponse);
+      }
+    );
+
+      this.cancelar();
+    }
+
+
+    cancelar() {
 
       this.loginFormulario.reset({
         login: '',
         senha: ''
       });
+
       this.loginFormDirective.resetForm(); //Reseta o template
       this.dialogRef.close(this.loginFormulario.value);
     }
-
-
-    cadastrar() {
-
-
-
-    }
+    
 
     logarComGoogle() {
       this.router.navigate(['/externalRedirect', { externalUrl: 'http://localhost:8080/myapp/oauth2/authorization/google' }]);
@@ -76,5 +88,9 @@ export class LoginComponent implements OnInit {
 
     logarComEventoAS() {
       this.router.navigate(['/externalRedirect', { externalUrl: 'http://localhost:8080/myapp/oauth2/authorization/way2learnclient' }]);
+    }
+
+    ngOnDestroy() {
+      this.errorSub.unsubscribe();
     }
 }

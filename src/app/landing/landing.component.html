@@ -1,0 +1,128 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand logo_font" href="#">EventoApp</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#about">ABOUT</a></li>
+                <li><a href="#services">SERVICES</a></li>
+                <li class="landing_separator"><a href="#contact">CONTACT</a></li>
+                <li class="landing_separator"><button i18n="@@butaoLogin" type="submit" mat-raised-button class="waves-effect waves-light btn margem-butao" (click)="openMainPage()">Logar</button></li>
+                <li><button i18n="@@butaoCadastrarUser" mat-raised-button class="waves-effect waves-light btn margem-butao" (click)="cadastrar()">Cadastrar</button></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+<div class="jumbotron text-center">
+    <h2>Sistema de Cadastramento de Eventos</h2> 
+    <p>Nós organizamos sua vida</p> 
+</div>
+
+<!-- Container (About Section) -->
+<div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-8">
+        <h2>About Company Page</h2>
+        <h4>Lorem ipsum..</h4>      
+        <p>Lorem ipsum..</p>
+        <button class="btn btn-default btn-lg">Get in Touch</button>
+      </div>
+
+      <div class="col-sm-4">
+        <span class="glyphicon glyphicon-signal logo"></span>
+      </div>
+    </div>
+</div>
+  
+<div class="container-fluid bg-grey">
+  <div class="row">
+      <div class="col-sm-4">
+        <span class="glyphicon glyphicon-globe logo"></span>
+      </div>
+      <div class="col-sm-8">
+        <h2>Our Values</h2>
+        <h4><strong>MISSION:</strong> Our mission lorem ipsum..</h4>      
+        <p><strong>VISION:</strong> Our vision Lorem ipsum..
+      </div>
+  </div>
+</div>
+
+<!-- Container (Services Section) -->
+<div class="container-fluid text-center">
+    <h2>SERVICES</h2>
+    <h4>What we offer</h4>
+    <br />
+    <div class="row">
+        <div class="col-sm-4">
+            <span class="glyphicon glyphicon-off logo-small"></span>
+            <h4>POWER</h4>
+            <p>Lorem ipsum dolor sit amet..</p>
+        </div>
+        <div class="col-sm-4">
+            <span class="glyphicon glyphicon-heart logo-small"></span>
+            <h4>LOVE</h4>
+            <p>Lorem ipsum dolor sit amet..</p>
+        </div>
+        <div class="col-sm-4">
+            <span class="glyphicon glyphicon-lock logo-small"></span>
+            <h4>JOB DONE</h4>
+            <p>Lorem ipsum dolor sit amet..</p>
+        </div>
+    </div>
+    <br />
+    <br />
+    <div class="row">
+        <div class="col-sm-4">
+            <span class="glyphicon glyphicon-leaf logo-small"></span>
+            <h4>GREEN</h4>
+            <p>Lorem ipsum dolor sit amet..</p>
+        </div>
+        <div class="col-sm-4">
+            <span class="glyphicon glyphicon-certificate logo-small"></span>
+            <h4>CERTIFIED</h4>
+            <p>Lorem ipsum dolor sit amet..</p>
+        </div>
+        <div class="col-sm-4">
+            <span class="glyphicon glyphicon-wrench logo-small"></span>
+            <h4 style="color: #303030;">HARD WORK</h4>
+            <p>Lorem ipsum dolor sit amet..</p>
+        </div>
+    </div>
+</div>
+
+<!-- Container (Contact Section) -->
+<div class="container-fluid bg-grey">
+    <h2 class="text-center">CONTACT</h2>
+    <div class="row">
+        <div class="col-sm-5">
+            <p>Contact us and we'll get back to you within 24 hours.</p>
+            <p><span class="glyphicon glyphicon-map-marker"></span> São Paulo, Brazil</p>
+            <p><span class="glyphicon glyphicon-phone"></span> +00 1515151515</p>
+            <p><span class="glyphicon glyphicon-envelope"></span> myemail@something.com</p>
+        </div>
+        <div class="col-sm-7">
+            <div class="row">
+                <div class="col-sm-6 form-group">
+                    <input class="form-control" id="name" name="name" placeholder="Name" type="text" required />
+                </div>
+                <div class="col-sm-6 form-group">
+                    <input class="form-control" id="email" name="email" placeholder="Email" type="email" required />
+                </div>
+            </div>
+            <textarea class="form-control" id="comments" name="comments" placeholder="Comment" rows="5"></textarea><br />
+            <div class="row">
+                <div class="col-sm-12 form-group">
+                    <button class="btn btn-default pull-right" type="submit">Send</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

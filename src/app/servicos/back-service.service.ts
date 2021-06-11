@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
 import { baseURL } from '../shared/baseurl';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { catchError, retry, map, } from 'rxjs/operators';
 import { ProcessHTTPMsgService } from './process-httpmsg.service';
 import { Evento } from '../models/evento';
@@ -24,15 +24,16 @@ export class BackServiceService {
 
   resposta_Delete_Evento: number;
   resposta_Grava_Convidado: number;
+  error = new Subject<string>();
 
   constructor(private http: HttpClient,
-              private ProcessHTTPMsgService: ProcessHTTPMsgService) {
+              private httpServiceErrorHandler: ProcessHTTPMsgService) {
       this.resposta_Delete_Evento = 200;
       this.resposta_Grava_Convidado = 200;
   }
 
 
-  postLogaUsuario(user: Usuario): Observable<boolean> {
+  postLogaUsuario(user: Usuario): Observable<void> {
     const url = `${baseURL}/logar/`;
 
     const formOptions = {
@@ -45,8 +46,8 @@ export class BackServiceService {
     .set('username', user.userName)
     .set('password', user.password);
 
-    return this.http.post<boolean>(url, params, formOptions)
-    .pipe(catchError(this.ProcessHTTPMsgService.handleError));
+    return this.http.post<void>(url, params, formOptions)
+    //.pipe(catchError(this.httpServiceErrorHandler.handleError));
   }
 
 
@@ -54,7 +55,7 @@ export class BackServiceService {
 getUsuario(): Observable<Usuario> {
   const url = `${baseURL}/loggedUser/`;
   return this.http.get<Usuario>(url)
-  .pipe(catchError(this.ProcessHTTPMsgService.handleError));
+  .pipe(catchError(this.httpServiceErrorHandler.handleError));
 }
 
 
@@ -68,21 +69,21 @@ getUsuario(): Observable<Usuario> {
         eventList.push(responseData[key])
       }
       return eventList;
-    }));
-    //.pipe(catchError(this.ProcessHTTPMsgService.handleError));
+    }), catchError(this.httpServiceErrorHandler.handleError)
+   );
   }
 
   getEvento(codigo: number): Observable<Evento> {
     return this.http.get<Evento>(baseURL + "/seekEvent/" + codigo)
-    .pipe(retry(3), catchError(this.ProcessHTTPMsgService.handleError));
+    .pipe(retry(3), catchError(this.httpServiceErrorHandler.handleError));
   }
 
 
 
   postCadastraEvento(evento: Evento): Observable<boolean> {
-    const url = `${baseURL}/cadastrarEvento/`;
+    const url = `${baseURL}/saveEvent/`;
     return this.http.post<boolean>(url, evento, httpOptions)
-    .pipe(retry(3), catchError(this.ProcessHTTPMsgService.handleError));
+    .pipe(retry(3), catchError(this.httpServiceErrorHandler.handleError));
   }
 
 
@@ -109,7 +110,7 @@ getUsuario(): Observable<Usuario> {
   getListaConvidados(codigo: number): Observable<Convidado[]> {
     const url = `${baseURL}/guestList/${codigo}`;
     return this.http.get<Convidado[]>(url)
-    .pipe(retry(3), catchError(this.ProcessHTTPMsgService.handleError));
+    .pipe(retry(3), catchError(this.httpServiceErrorHandler.handleError));
   }
 
 
@@ -137,6 +138,6 @@ getUsuario(): Observable<Usuario> {
   deleteConvidado(id: number): Observable<Evento> {
     const url = `${baseURL}/deletarConvidado/${id}`;
     return this.http.delete<Evento>(url, httpOptions)
-    .pipe(catchError(this.ProcessHTTPMsgService.handleError));
+    .pipe(catchError(this.httpServiceErrorHandler.handleError));
   }
 }
