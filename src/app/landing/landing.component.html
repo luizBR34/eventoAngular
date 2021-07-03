@@ -26,6 +26,11 @@
     <p>Nós organizamos sua vida</p> 
 </div>
 
+<div class="alert alert-danger" *ngIf="msgError" style="text-align: center;">
+        <p>{{ msgError }}</p>
+        <button class="btn btn-danger" (click)="onHandleError()">Okay</button>
+</div>
+
 <!-- Container (About Section) -->
 <div class="container-fluid">
     <div class="row">

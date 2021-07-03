@@ -27,11 +27,8 @@ export class FormEventoComponent implements OnInit {
   }
 
   onSubmit() {
-    this.service.postCadastraEvento(this.evento)
-    .subscribe(statusGravacao => this.statusGravaEvento = statusGravacao,
-      msgError => this.msgError = <any>msgError);
-
-      this.eventoFormDirective.resetForm();
+    this.service.postCadastraEvento(this.evento);
+    this.eventoFormDirective.resetForm();
   }
 
 }

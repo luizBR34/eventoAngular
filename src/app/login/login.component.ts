@@ -1,10 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialogRef } from "@angular/material";
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, NgForm } from '@angular/forms';
 import { BackServiceService } from '../servicos/back-service.service';
 import { Usuario } from '../models/usuario';
 import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -16,9 +15,9 @@ export class LoginComponent implements OnInit {
   loginFormulario: FormGroup;
   user: Usuario;
   description: string;
-  msgError = null;
+  isLoading = false;
   statusLogin: boolean;
-  private errorSub: Subscription;
+  
   @ViewChild('lform') loginFormDirective; //Acessa o formulario do template em HTML
 
 
@@ -33,10 +32,6 @@ export class LoginComponent implements OnInit {
 
     ngOnInit() { 
       this.user = new Usuario();
-
-      this.errorSub = this.service.error.subscribe(errorMessage => {
-        this.msgError = errorMessage;
-      });
     }
 
 
@@ -54,15 +49,20 @@ export class LoginComponent implements OnInit {
     
 
     logar() {
+
       this.user.userName = this.loginFormulario.get('login').value;
       this.user.password = this.loginFormulario.get('senha').value;
 
+      this.isLoading = true;
+
       this.service.postLogaUsuario(this.user)
       .subscribe(() => {
-        this.msgError = null;
-      }, errorResponse => { 
-        this.msgError = errorResponse.message;
+        this.isLoading = false;
+        this.router.navigate(['/eventos']);
+      }, errorResponse => {
         console.log(errorResponse);
+        this.service.error.next(errorResponse.statusText);
+        this.isLoading = false;
       }
     );
 
@@ -88,9 +88,5 @@ export class LoginComponent implements OnInit {
 
     logarComEventoAS() {
       this.router.navigate(['/externalRedirect', { externalUrl: 'http://localhost:8080/myapp/oauth2/authorization/way2learnclient' }]);
-    }
-
-    ngOnDestroy() {
-      this.errorSub.unsubscribe();
     }
 }

@@ -9,4 +9,5 @@ export class Usuario {
     lastName: string;
     email: string;
     roles: Role[] = [];
+    events: Event[] = [];
 }

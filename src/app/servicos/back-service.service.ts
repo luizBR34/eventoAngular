@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpEventType } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
 import { baseURL } from '../shared/baseurl';
 import { Observable, Subject } from 'rxjs';
-import { catchError, retry, map, } from 'rxjs/operators';
+import { catchError, retry, map, tap, } from 'rxjs/operators';
 import { ProcessHTTPMsgService } from './process-httpmsg.service';
 import { Evento } from '../models/evento';
 import { Convidado } from '../models/Convidado';
@@ -78,12 +78,25 @@ getUsuario(): Observable<Usuario> {
     .pipe(retry(3), catchError(this.httpServiceErrorHandler.handleError));
   }
 
-
-
-  postCadastraEvento(evento: Evento): Observable<boolean> {
+  postCadastraEvento(evento: Evento): boolean {
     const url = `${baseURL}/saveEvent/`;
-    return this.http.post<boolean>(url, evento, httpOptions)
-    .pipe(retry(3), catchError(this.httpServiceErrorHandler.handleError));
+    let result = false;
+    this.http.post(url, evento,
+      { 
+        headers: new HttpHeaders({ 'content-type' : 'application/json' }),
+        observe: 'events' 
+      }).pipe(tap(event => {
+        if (event.type === HttpEventType.Sent) {
+          console.log("Event was successfully sent to the server!");
+          result = true;
+        }
+      })
+    )
+    .subscribe(() => { }, 
+      error => {
+        console.log("An Error occour when to get response from server!");
+      });
+      return result;
   }
 
 

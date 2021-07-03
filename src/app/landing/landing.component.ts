@@ -1,18 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { BackServiceService } from '../servicos/back-service.service';
 import { MatDialog } from '@angular/material';
 import { dialogConfig } from '../shared/dialogConfig';
 import { LoginComponent } from '../login/login.component';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-landing',
   templateUrl: './landing.component.html',
   styleUrls: ['./landing.component.css']
 })
-export class LandingComponent implements OnInit {
+export class LandingComponent implements OnInit, OnDestroy {
 
   login: boolean = null;
+  msgError: string = null;
+  private errorSub: Subscription;
 
   constructor(private dialog: MatDialog, 
     private rota: ActivatedRoute,
@@ -20,6 +23,11 @@ export class LandingComponent implements OnInit {
     private service: BackServiceService) { }
 
   ngOnInit() {
+
+    this.errorSub = this.service.error.subscribe(errorMessage => {
+      this.msgError = errorMessage;
+      console.log("msgError: " + this.msgError);
+    });
 
     this.rota.queryParams
     .subscribe(params => {
@@ -29,10 +37,6 @@ export class LandingComponent implements OnInit {
 
     if (this.login != null) {
       this.openLoginDialog();
-      if (!this.login) {
-        const signInError = "Error while sign in";
-        this.service.error.next(signInError);
-      }
     } 
 
   }
@@ -59,8 +63,12 @@ export class LandingComponent implements OnInit {
   }
 
 
+  onHandleError() {
+    this.msgError = null;
+  }
 
-
-
+  ngOnDestroy() {
+    this.errorSub.unsubscribe();
+  }
 
 }

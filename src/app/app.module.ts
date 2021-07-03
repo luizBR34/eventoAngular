@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-import { HttpClientModule } from '@angular/common/http'; //REST HTTP
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'; //REST HTTP
 
 import { BackServiceService } from './servicos/back-service.service';
 import { ProcessHTTPMsgService } from './servicos/process-httpmsg.service';
@@ -31,6 +31,8 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle'; //Usado n
 
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { LandingComponent } from './landing/landing.component'; 
+import { AuthInterceptorService } from './servicos/auth-interceptor.service';
+import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
 
 
 @NgModule({
@@ -41,7 +43,8 @@ import { LandingComponent } from './landing/landing.component';
     DetalhesEventoComponent,
     FormEventoComponent,
     LoginComponent,
-    LandingComponent
+    LandingComponent,
+    LoadingSpinnerComponent
   ],
   imports: [
     BrowserModule,
@@ -63,7 +66,12 @@ import { LandingComponent } from './landing/landing.component';
   providers: [
     BackServiceService,
     ProcessHTTPMsgService,
-    { provide: 'baseURL', useValue: baseURL }
+    { provide: 'baseURL', useValue: baseURL }, 
+    {
+      provide: HTTP_INTERCEPTORS, 
+      useClass: AuthInterceptorService, 
+      multi: true
+    }
   ],
   entryComponents: [
     LoginComponent

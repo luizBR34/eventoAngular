@@ -1,3 +1,5 @@
+import { Usuario } from './usuario';
+
 export class Evento {
 
 	code: number;
@@ -5,4 +7,5 @@ export class Evento {
 	city: string;
 	date: string;
 	time: string;
+	user: Usuario;
 }
