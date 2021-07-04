@@ -26,9 +26,8 @@
     <p>Nós organizamos sua vida</p> 
 </div>
 
-<div class="alert alert-danger" *ngIf="msgError" style="text-align: center;">
-        <p>{{ msgError }}</p>
-        <button class="btn btn-danger" (click)="onHandleError()">Okay</button>
+<div *ngIf="isLoading" style="text-align: left;">
+    <app-loading-spinner></app-loading-spinner>
 </div>
 
 <!-- Container (About Section) -->

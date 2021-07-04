@@ -24,7 +24,7 @@ export class BackServiceService {
 
   resposta_Delete_Evento: number;
   resposta_Grava_Convidado: number;
-  error = new Subject<string>();
+  loginLoading = new Subject<boolean>();
 
   constructor(private http: HttpClient,
               private httpServiceErrorHandler: ProcessHTTPMsgService) {

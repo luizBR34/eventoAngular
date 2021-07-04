@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
   loginFormulario: FormGroup;
   user: Usuario;
   description: string;
-  isLoading = false;
+  msgError: string = null;
   statusLogin: boolean;
   
   @ViewChild('lform') loginFormDirective; //Acessa o formulario do template em HTML
@@ -53,20 +53,20 @@ export class LoginComponent implements OnInit {
       this.user.userName = this.loginFormulario.get('login').value;
       this.user.password = this.loginFormulario.get('senha').value;
 
-      this.isLoading = true;
+      this.service.loginLoading.next(true);
 
       this.service.postLogaUsuario(this.user)
       .subscribe(() => {
-        this.isLoading = false;
+        this.service.loginLoading.next(false);
+        this.cancelar();
+        this.msgError = null;
         this.router.navigate(['/eventos']);
       }, errorResponse => {
         console.log(errorResponse);
-        this.service.error.next(errorResponse.statusText);
-        this.isLoading = false;
+        this.msgError = errorResponse.statusText;
+        this.service.loginLoading.next(false);
       }
-    );
-
-      this.cancelar();
+     );  
     }
 
 

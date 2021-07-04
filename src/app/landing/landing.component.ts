@@ -14,7 +14,7 @@ import { Subscription } from 'rxjs';
 export class LandingComponent implements OnInit, OnDestroy {
 
   login: boolean = null;
-  msgError: string = null;
+  isLoading: boolean = false;
   private errorSub: Subscription;
 
   constructor(private dialog: MatDialog, 
@@ -24,9 +24,8 @@ export class LandingComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
 
-    this.errorSub = this.service.error.subscribe(errorMessage => {
-      this.msgError = errorMessage;
-      console.log("msgError: " + this.msgError);
+    this.errorSub = this.service.loginLoading.subscribe(status => {
+      this.isLoading = status;
     });
 
     this.rota.queryParams
@@ -62,10 +61,6 @@ export class LandingComponent implements OnInit, OnDestroy {
 
   }
 
-
-  onHandleError() {
-    this.msgError = null;
-  }
 
   ngOnDestroy() {
     this.errorSub.unsubscribe();

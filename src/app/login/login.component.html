@@ -4,11 +4,11 @@
 <fieldset>
 <legend i18n="@@tituloDialogoLogin">{{description}}</legend>
 
-<div *ngIf="isLoading" style="text-align: center;">
-    <app-loading-spinner></app-loading-spinner>
+<div class="alert alert-danger" *ngIf="msgError" style="text-align: center;">
+    <p>Invalid User And/or Password!</p>
 </div>
-    
-<mat-dialog-content [formGroup]="loginFormulario" #lform="ngForm" *ngIf="!isLoading">
+  
+<mat-dialog-content [formGroup]="loginFormulario" #lform="ngForm">
   <p>
     <mat-form-field class="full-width">
         <input matInput 
