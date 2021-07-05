@@ -25,7 +25,7 @@
     <mat-form-field class="full-width">
         <input matInput 
                 formControlName="senha"
-                type="text"
+                type="password"
                 i18n-placeholder="@@rotuloSenhaLogin"
                 placeholder="Senha:"
                 required>
@@ -45,7 +45,7 @@
     <div class="row">
         <div class="cols-xs-12">
                 <button i18n="@@butaoLogin" type="submit" mat-raised-button class="waves-effect waves-light btn margem-butao" (click)="logar()">Logar</button>
-                <button i18n="@@butaoCancelar" mat-raised-button class="waves-effect waves-light btn margem-butao" (click)="cancelar()">Cancelar</button>
+                <button i18n="@@butaoCancelar" mat-raised-button class="waves-effect waves-light btn margem-butao" (click)="close()">Cancelar</button>
         </div>
     </div>
 

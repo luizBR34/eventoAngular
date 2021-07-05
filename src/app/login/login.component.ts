@@ -58,26 +58,29 @@ export class LoginComponent implements OnInit {
       this.service.postLogaUsuario(this.user)
       .subscribe(() => {
         this.service.loginLoading.next(false);
-        this.cancelar();
+        this.close();
         this.msgError = null;
         this.router.navigate(['/eventos']);
       }, errorResponse => {
         console.log(errorResponse);
         this.msgError = errorResponse.statusText;
         this.service.loginLoading.next(false);
+        this.resetForm();
       }
      );  
     }
 
-
-    cancelar() {
-
+    resetForm() {
       this.loginFormulario.reset({
         login: '',
         senha: ''
       });
 
-      this.loginFormDirective.resetForm(); //Reseta o template
+      this.loginFormDirective.resetForm();
+    }
+
+    close() {
+      this.resetForm();
       this.dialogRef.close(this.loginFormulario.value);
     }
     
