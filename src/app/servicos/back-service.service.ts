@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams, HttpEventType } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpEventType, HttpUserEvent, HttpEvent } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
 import { baseURL } from '../shared/baseurl';
 import { Observable, Subject } from 'rxjs';
@@ -78,26 +78,21 @@ getUsuario(): Observable<Usuario> {
     .pipe(retry(3), catchError(this.httpServiceErrorHandler.handleError));
   }
 
-  postCadastraEvento(evento: Evento): boolean {
+  postCadastraEvento(evento: Evento): Observable<HttpEvent<void>> {
     const url = `${baseURL}/saveEvent/`;
-    let result = false;
-    this.http.post(url, evento,
+
+    return this.http.post<void>(url, evento,
       { 
         headers: new HttpHeaders({ 'content-type' : 'application/json' }),
         observe: 'events' 
       }).pipe(tap(event => {
         if (event.type === HttpEventType.Sent) {
           console.log("Event was successfully sent to the server!");
-          result = true;
         }
       })
-    )
-    .subscribe(() => { }, 
-      error => {
-        console.log("An Error occour when to get response from server!");
-      });
-      return result;
+    );
   }
+  
 
 
   deleteEvento(codigo: number): number {

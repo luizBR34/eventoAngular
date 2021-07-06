@@ -11,7 +11,9 @@ export class FormEventoComponent implements OnInit {
 
   evento = new Evento();
   statusGravaEvento: boolean;
-  msgError: string;
+  status: boolean = false;
+  isFetching: boolean = false;
+  msgError = null;
 
   @ViewChild('eventoForm') eventoFormDirective;
 
@@ -27,8 +29,30 @@ export class FormEventoComponent implements OnInit {
   }
 
   onSubmit() {
-    this.service.postCadastraEvento(this.evento);
+
+    this.isFetching = true;
+
+    this.service
+    .postCadastraEvento(this.evento)
+    .subscribe((response) => {
+      this.isFetching = false;
+      this.status = true;
+      this.msgError = null;
+    }, error => {
+        this.isFetching = false;
+        this.status = false;
+        this.msgError = error.statusText;
+        console.log("An Error occour when to get response from server!");
+      });
+
     this.eventoFormDirective.resetForm();
   }
 
+  onConfirm() {
+    this.status = false;
+  }
+
+  onHandleError() {
+    this.msgError = null;
+  }
 }

@@ -34,4 +34,32 @@
 
     <button i18n="@@butaoSalvarCadastroEvento" mat-button type="submit" class="waves-effect waves-light btn" [disabled]="eventoForm.form.invalid">Salvar</button>
   </form>
+
+  <div class="wrapper">
+      <div class="overlay" *ngIf="isFetching && !status">
+          <div class="spinner-wrapper">
+              <app-loading-spinner></app-loading-spinner>
+          </div>
+      </div>		
+      <div class="loaded-content" [class.blurred]="isFetching">
+          <ng-content></ng-content>
+      </div>
+  </div>
 </div>
+
+<div class="col-md-6">
+    <div class="alert alert-success" *ngIf="status; else errorStatus">
+        <h4>The Event was successfully saved!</h4>
+        <button class="btn btn-success" (click)="onConfirm()">Okay</button>
+    </div>
+</div>
+
+<ng-template #errorStatus>
+<div class="col-md-6">
+  <div class="alert alert-danger" *ngIf="msgError">
+      <h3>An Error Occurred!</h3>
+      <p>{{ msgError }}</p>
+      <button class="btn btn-danger" (click)="onHandleError()">Okay</button>
+  </div>
+</div>
+</ng-template>

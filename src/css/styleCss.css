@@ -1,6 +1,14 @@
 .mat-checkbox-checkmark-path {
 	stroke: blue !important;
 }
+
+.alert {
+	margin-bottom: 0px;
+}
+	
+.alert-success {
+	margin-top: 5rem;
+}
  
 
 label {
@@ -39,9 +47,14 @@ label {
 }
 
 input[type=text]:not(.browser-default) {
-	height: 4rem !important;
+	height: 5rem !important;
 	margin: 0 0 0 0 !important;
 	width: 95% !important;
+}
+
+input[type=password]:not(.browser-default) {
+	height: 5rem !important;
+	margin: 0 0 0 0 !important;
 }
 
 input[type=date]:not(.browser-default) {

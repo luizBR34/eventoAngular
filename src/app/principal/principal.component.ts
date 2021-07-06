@@ -15,7 +15,6 @@ export class PrincipalComponent implements OnInit {
 
   eventos: Evento[] = [];
   msgError = null;
-  login: boolean = null;
   isFetching = false;
 
   navigationSubscription;
@@ -31,6 +30,7 @@ export class PrincipalComponent implements OnInit {
       this.service.getEventos()
       .subscribe(eventsReceived => {
         this.isFetching = false;
+        this.msgError = null;
         this.eventos = eventsReceived
       }, errorResponse => { 
         this.isFetching = false;

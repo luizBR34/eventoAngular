@@ -2,10 +2,6 @@
 
 <div class="relativo">
 
-<div *ngIf="isFetching" style="text-align: center;">
-	<app-loading-spinner></app-loading-spinner>
-</div>
-
 <table class="container">
 	<thead>
 	<tr>
@@ -27,11 +23,23 @@
     <td><a routerLink="/eventos" routerLinkActive='active' (click)="onDeleteEvento(evento.code)"><i class="material-icons left">delete</i></a></td>
 	</tr>
 	</tbody>
-	<p *ngIf="isFetching && !msgError">Loading...</p>
+
 	<div class="alert alert-danger" *ngIf="msgError">
 		<h3>An Error Occurred!</h3>
 		<p>{{ msgError }}</p>
 		<button class="btn btn-danger" (click)="onHandleError()">Okay</button>
 	</div>
+
+	<div class="wrapper">
+			<div class="overlay" *ngIf="isFetching && !msgError">
+					<div class="spinner-wrapper">
+							<app-loading-spinner></app-loading-spinner>
+					</div>
+			</div>		
+			<div class="loaded-content" [class.blurred]="isFetching">
+					<ng-content></ng-content>
+			</div>
+	</div>
+	
 </table>
 </div>

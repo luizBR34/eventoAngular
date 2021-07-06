@@ -26,9 +26,19 @@
     <p>Nós organizamos sua vida</p> 
 </div>
 
-<div *ngIf="isLoading" style="text-align: left;">
-    <app-loading-spinner></app-loading-spinner>
+
+<div class="wrapper">
+    <div class="overlay" *ngIf="isLoading">
+        <div class="spinner-wrapper">
+            <app-loading-spinner></app-loading-spinner>
+        </div>
+    </div>
+      
+    <div class="loaded-content" [class.blurred]="isLoading">
+        <ng-content></ng-content>
+    </div>
 </div>
+
 
 <!-- Container (About Section) -->
 <div class="container-fluid">
