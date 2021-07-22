@@ -37,13 +37,14 @@ export class DetalhesEventoComponent implements OnInit {
       this.navigationSubscription = this.r.events.subscribe((e: any) => {
         // If it is a NavigationEnd event re-initalise the component
         if (e instanceof NavigationEnd) {
-          this.atualizaListaConvidados();
+          //this.atualizaListaConvidados();
         }
       });
 
     }
 
-    atualizaListaConvidados() {
+
+/*     atualizaListaConvidados() {
 
       setTimeout (() => {
         this.service.getListaConvidados(this.event.code)
@@ -51,18 +52,28 @@ export class DetalhesEventoComponent implements OnInit {
         msgError => this.msgError = <any>msgError);
       }, 500);
 
-    }
+    } */
 
   ngOnInit() {
+    
+    this.event = new Evento();
+
     this.rota.params.subscribe(params => {
       this.codigo = params['id'];
     });
 
     this.service.getEvento(this.codigo)
-    .subscribe(event => this.event = event,
-    msgError => this.msgError = <any>msgError);
+    .subscribe(event => { 
+      console.log(event);
+      this.event = event
+    }, errorResponse => { 
+        this.msgError = errorResponse.message;
+        console.log(errorResponse);
+      }
+    );
 
-    this.atualizaListaConvidados();
+
+    //this.atualizaListaConvidados();
   }
 
 
@@ -91,7 +102,7 @@ export class DetalhesEventoComponent implements OnInit {
     
     this.convidadoFormDirective.resetForm();
 
-    this.atualizaListaConvidados();
+    //this.atualizaListaConvidados();
   }
 
 

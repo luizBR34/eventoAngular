@@ -10,4 +10,5 @@ export class Usuario {
     email: string;
     roles: Role[] = [];
     events: Event[] = [];
+    authorization: string;
 }

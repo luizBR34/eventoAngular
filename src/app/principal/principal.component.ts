@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { BackServiceService } from '../servicos/back-service.service';
 import { Evento } from '../models/evento';
 
-import { MatDialog } from '@angular/material'; // --> USADO PARA DIALOGO
-import { LoginComponent } from '../login/login.component';// --> USADO PARA DIALOGO
+import { MatDialog } from '@angular/material'; 
+import { LoginComponent } from '../login/login.component';
 import { dialogConfig } from '../shared/dialogConfig';
 
 @Component({
@@ -34,14 +34,13 @@ export class PrincipalComponent implements OnInit {
         this.eventos = eventsReceived
       }, errorResponse => { 
         this.isFetching = false;
-        this.msgError = errorResponse 
+        this.msgError = errorResponse
       });
     }
 
 
   
   ngOnInit() {
-
     this.atualizaListaEventos();
   }
 
@@ -53,15 +52,23 @@ export class PrincipalComponent implements OnInit {
 
   onDeleteEvento(cod: number) {
 
-    let estado = this.service.deleteEvento(cod);
+    this.service.deleteEvento(cod)
+    .subscribe(() => {
+      this.msgError = null;
+    }, error => {
+        this.msgError = error.statusText;
+    });
 
-    if (estado == 404) {
-      this.openLoginForm();
-    } else {
+    if (this.msgError === null) {
       this.dialog.closeAll();
-    }
 
-    this.atualizaListaEventos();
+      setTimeout (() => {
+        this.atualizaListaEventos();
+      }, 2000);
+      
+    } else {
+      this.openLoginForm();
+    }
   }
 
 

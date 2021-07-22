@@ -5,10 +5,10 @@ const proxy = [
     pathRewrite: {'^/api' : ''},
     secure: false,
     bypass: (req, res, proxyOptions) => {
-      res.setHeader('Access-Control-Allow-Headers', "Content-Type");
-      res.setHeader('access-control-allow-origin', "*");
+      res.setHeader('Access-Control-Allow-Headers', "*");
+      res.setHeader('Access-Control-Allow-Origin', "*");
       res.setHeader('Access-Control-Allow-Methods', "*");
-      res.setHeader('access-control-allow-credentials', "true");
+      res.setHeader('Access-Control-Allow-Credentials', "true");
     }
   }
 ];

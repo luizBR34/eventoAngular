@@ -66,7 +66,7 @@ import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinne
   providers: [
     BackServiceService,
     ProcessHTTPMsgService,
-    { provide: 'baseURL', useValue: baseURL }, 
+    { provide: 'baseURL', useValue: baseURL },
     {
       provide: HTTP_INTERCEPTORS, 
       useClass: AuthInterceptorService, 

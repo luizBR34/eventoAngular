@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators, NgForm } from '@angular/forms';
 import { BackServiceService } from '../servicos/back-service.service';
 import { Usuario } from '../models/usuario';
 import { Router } from '@angular/router';
+import { HttpResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
@@ -17,13 +18,13 @@ export class LoginComponent implements OnInit {
   description: string;
   msgError: string = null;
   statusLogin: boolean;
-  
+
   @ViewChild('lform') loginFormDirective; //Acessa o formulario do template em HTML
 
 
   constructor(private fb: FormBuilder,
     private dialogRef: MatDialogRef<LoginComponent>,
-    private service: BackServiceService, 
+    private service: BackServiceService,
     private router: Router) {
     this.description = "Por favor se indentifique primeiro";
     this.createForm();
@@ -55,19 +56,26 @@ export class LoginComponent implements OnInit {
 
       this.service.loginLoading.next(true);
 
-      this.service.postLogaUsuario(this.user)
-      .subscribe(() => {
+       this.service.postLogaUsuario(this.user)
+      .subscribe((data: HttpResponse<any>) => {
         this.service.loginLoading.next(false);
+
+        console.log("Cookie recebido: " + data.headers.get('authorization'));
+        const user = new Usuario();
+        user.authorization = data.headers.getAll('authorization')[0];
+        this.service.authorization.next(user);
+
         this.close();
         this.msgError = null;
         this.router.navigate(['/eventos']);
+
       }, errorResponse => {
         console.log(errorResponse);
         this.msgError = errorResponse.statusText;
         this.service.loginLoading.next(false);
         this.resetForm();
       }
-     );  
+     );
     }
 
     resetForm() {
