@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Evento } from '../models/evento';
 import { BackServiceService } from '../servicos/back-service.service';
+import { AuthenticatedUserService } from '../servicos/authenticated-user.service';
 
 @Component({
   selector: 'app-form-evento',
@@ -17,7 +18,8 @@ export class FormEventoComponent implements OnInit {
 
   @ViewChild('eventoForm') eventoFormDirective;
 
-  constructor(private service: BackServiceService) { 
+  constructor(private callApi: BackServiceService,
+    private persistenceService: AuthenticatedUserService) { 
 
     this.evento.name = '';
     this.evento.city = '';
@@ -32,8 +34,9 @@ export class FormEventoComponent implements OnInit {
 
     this.isFetching = true;
 
-    this.service
-    .postCadastraEvento(this.evento)
+    let user = this.persistenceService.getUser("loggedUser");
+
+    this.callApi.postCadastraEvento(user.userName, this.evento)
     .subscribe((response) => {
       this.isFetching = false;
       this.status = true;

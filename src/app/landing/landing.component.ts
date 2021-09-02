@@ -1,10 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { BackServiceService } from '../servicos/back-service.service';
 import { MatDialog } from '@angular/material';
 import { dialogConfig } from '../shared/dialogConfig';
 import { LoginComponent } from '../login/login.component';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { ExchangeDataService } from '../servicos/exchange-data.service';
 
 @Component({
   selector: 'app-landing',
@@ -20,11 +20,11 @@ export class LandingComponent implements OnInit, OnDestroy {
   constructor(private dialog: MatDialog, 
     private rota: ActivatedRoute,
     private router: Router,
-    private service: BackServiceService) { }
+    private exchangeData: ExchangeDataService) { }
 
   ngOnInit() {
 
-    this.errorSub = this.service.loginLoading.subscribe(status => {
+    this.errorSub = this.exchangeData.getSubject().subscribe(status => {
       this.isLoading = status;
     });
 
@@ -42,13 +42,14 @@ export class LandingComponent implements OnInit, OnDestroy {
 
 
   openMainPage() {
-    this.router.navigate(['/externalRedirect', { externalUrl: 'http://localhost:8080/myapp/mainPage' }]);
+    this.router.navigate(['/externalRedirect', { externalUrl: 'https://localhost:8443/myapp/oauth2/authorization/eventoas' }]);
   }
 
 
 
   openLoginDialog(): void {
 
+    dialogConfig.data = "LOGIN";
     let dialogRef = this.dialog.open(LoginComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(

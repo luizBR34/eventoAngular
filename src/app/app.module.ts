@@ -5,7 +5,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'; //RE
 
 import { BackServiceService } from './servicos/back-service.service';
 import { ProcessHTTPMsgService } from './servicos/process-httpmsg.service';
-import { baseURL } from './shared/baseurl';
+import { baseURL, baseURL2 } from './shared/baseurl';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -33,6 +33,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { LandingComponent } from './landing/landing.component'; 
 import { AuthInterceptorService } from './servicos/auth-interceptor.service';
 import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
+import { ExchangeDataService } from './servicos/exchange-data.service';
+import { AuthenticatedUserService } from './servicos/authenticated-user.service';
 
 
 @NgModule({
@@ -66,7 +68,10 @@ import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinne
   providers: [
     BackServiceService,
     ProcessHTTPMsgService,
+    ExchangeDataService,
+    AuthenticatedUserService,
     { provide: 'baseURL', useValue: baseURL },
+    { provide: 'baseURL2', useValue: baseURL2 },
     {
       provide: HTTP_INTERCEPTORS, 
       useClass: AuthInterceptorService, 

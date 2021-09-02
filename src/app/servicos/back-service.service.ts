@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams, HttpEventType, HttpUserEvent, HttpEvent, HttpResponse } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
-import { baseURL } from '../shared/baseurl';
-import { Observable, Subject, BehaviorSubject } from 'rxjs';
+import { baseURL, baseURL2, baseURL3 } from '../shared/baseurl';
+import { Observable } from 'rxjs';
 import { catchError, retry, map, tap, } from 'rxjs/operators';
 import { ProcessHTTPMsgService } from './process-httpmsg.service';
 import { Evento } from '../models/evento';
 import { Convidado } from '../models/Convidado';
-import { Usuario } from '../models/usuario';
+import { TokenResponse } from '../models/tokenResponse';
 
 
 const httpOptions = {
@@ -22,48 +22,59 @@ const httpOptions = {
 })
 export class BackServiceService {
 
-  resposta_Delete_Evento: number;
   resposta_Grava_Convidado: number;
-  loginLoading = new Subject<boolean>();
-  authorization = new BehaviorSubject<Usuario>(null);
 
   constructor(private http: HttpClient,
               private httpServiceErrorHandler: ProcessHTTPMsgService) {
-      this.resposta_Delete_Evento = 200;
       this.resposta_Grava_Convidado = 200;
   }
 
 
-  postLogaUsuario(user: Usuario): Observable<HttpResponse<any>> {
-    const url = `${baseURL}/logar/`;
+
+  postLogaUsuario(username: string, password: string): Observable<HttpResponse<any>> {
+
+    const url = `${baseURL3}/logar/`;
 
     const params = new HttpParams()
-    .set('username', user.userName)
-    .set('password', user.password);
+    .set('username', username)
+    .set('password', password);
 
     return this.http.post<any>(url, params,
     { 
-      headers: new HttpHeaders({ 'content-type' : 'application/x-www-form-urlencoded' }),
+      headers: new HttpHeaders({ 'Content-Type' : 'application/x-www-form-urlencoded' })
+      .append('Cache-Control', 'max-age=0'),
       observe: 'response' as 'body'
     })
     .pipe(map(user => {
       return user;
-    }));
-    //.pipe(catchError(this.httpServiceErrorHandler.handleError));
+    }))
+    .pipe(catchError(this.httpServiceErrorHandler.handleError));
   }
 
 
 
-getUsuario(): Observable<Usuario> {
-  const url = `${baseURL}/loggedUser/`;
-  return this.http.get<Usuario>(url)
-  .pipe(catchError(this.httpServiceErrorHandler.handleError));
-}
+
+  getToken(username: string, password: string): Observable<TokenResponse> {
+
+    const url = `${baseURL3}/oauth/token`;
+
+    const params = new HttpParams()
+    .set('grant_type', 'password')
+    .set('username', username)
+    .set('password', password);
+
+    return this.http.post<TokenResponse>(url, params,
+      { 
+        headers: new HttpHeaders({ 'Content-Type' : 'application/x-www-form-urlencoded' })
+        .append('cache-control', 'no-cache')
+      })
+      .pipe(catchError(this.httpServiceErrorHandler.handleError));
+  }
 
 
 
-  getEventos(): Observable<Evento[]> {
-    const url = `${baseURL}/events/`;
+  getEventos(username: string): Observable<Evento[]> {
+    const url = `${baseURL}/events/` + username;
     return this.http.get<Evento[]>(url,
       { 
         headers: new HttpHeaders({ 'content-type' : 'application/json' })
@@ -78,18 +89,22 @@ getUsuario(): Observable<Usuario> {
    );
   }
 
-  getEvento(codigo: number): Observable<Evento> {
+  getEvento(username: string, codigo: number): Observable<Evento> {
     const url = `${baseURL}/seekEvent/${codigo}/`;
-    return this.http.get<Evento>(url)
+    return this.http.get<Evento>(url,
+      { 
+        headers: new HttpHeaders({ 'username' : username })
+      })
     .pipe(catchError(this.httpServiceErrorHandler.handleError));
   }
 
-  postCadastraEvento(evento: Evento): Observable<HttpEvent<void>> {
+  postCadastraEvento(username: string, evento: Evento): Observable<HttpEvent<void>> {
     const url = `${baseURL}/saveEvent/`;
 
     return this.http.post<void>(url, evento,
       { 
-        headers: new HttpHeaders({ 'content-type' : 'application/json' }),
+        headers: new HttpHeaders({ 'content-type' : 'application/json' })
+        .append('username', username),
         observe: 'events' 
       }).pipe(tap(event => {
         if (event.type === HttpEventType.Sent) {
@@ -101,10 +116,13 @@ getUsuario(): Observable<Usuario> {
   
 
 
-  deleteEvento(codigo: number): Observable<HttpEvent<void>> {
+  deleteEvento(username: string, codigo: number): Observable<HttpEvent<void>> {
 
       const url = `${baseURL}/deleteEvent/${codigo}`;
-      return this.http.delete<void>(url, { observe: 'events'})
+      return this.http.delete<void>(url, 
+        {
+          headers: new HttpHeaders({ 'username' : username }), 
+          observe: 'events'})
       .pipe(tap(event => {
         if (event.type === HttpEventType.Sent) {
           console.log("The request to Delete Event was sent successfully!");

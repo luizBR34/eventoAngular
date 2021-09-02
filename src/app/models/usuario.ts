@@ -8,7 +8,7 @@ export class Usuario {
     firstName: string;
     lastName: string;
     email: string;
+    token: string;
     roles: Role[] = [];
-    events: Event[] = [];
-    authorization: string;
+    //events: Event[] = [];
 }

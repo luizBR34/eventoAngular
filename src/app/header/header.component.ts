@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {  Router } from '@angular/router';
-import { BackServiceService } from '../servicos/back-service.service';
 import { Usuario } from '../models/usuario';
+import { AuthenticatedUserService } from '../servicos/authenticated-user.service';
 
 @Component({
   selector: 'app-header',
@@ -11,22 +11,21 @@ import { Usuario } from '../models/usuario';
 export class HeaderComponent implements OnInit {
 
   msgError = null;
-  usuarioLogado: Usuario;
+  usuarioLogado: Usuario = null;
 
   constructor(private router: Router,
-    private service: BackServiceService) { }
+    private persistenceService: AuthenticatedUserService) { }
 
 
 atualizaListaUsuarios() {
-    this.service.getUsuario()
-    .subscribe(usuario => { 
-      console.log(usuario);
-      this.usuarioLogado = usuario}, 
-      errorResponse => { 
-        this.msgError = errorResponse.message;
-        console.log(errorResponse);
-      }
-    );
+
+  this.usuarioLogado = this.persistenceService.getUser("loggedUser");
+
+  if (this.usuarioLogado == null) {
+
+    this.usuarioLogado = new Usuario();
+    this.usuarioLogado.userName = "Visitor";
+  }
 }
 
 
@@ -35,7 +34,6 @@ atualizaListaUsuarios() {
   }
 
   openFormCadastraEvento() {
-    this.router.navigate(['/externalRedirect', { externalUrl: 'http://localhost:8080/myapp/saveEvent' }]);
+    this.router.navigate(['/cadastrarEvento']);
   }
-
 }

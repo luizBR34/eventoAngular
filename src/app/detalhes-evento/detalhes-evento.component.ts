@@ -6,6 +6,7 @@ import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { MatDialog } from '@angular/material'; // --> USADO PARA DIALOGO
 import { LoginComponent } from '../login/login.component';// --> USADO PARA DIALOGO
 import { dialogConfig } from '../shared/dialogConfig';
+import { AuthenticatedUserService } from '../servicos/authenticated-user.service';
 
 
 @Component({
@@ -26,9 +27,10 @@ export class DetalhesEventoComponent implements OnInit {
 
   navigationSubscription;
 
-  constructor(private service: BackServiceService,
+  constructor(private callApi: BackServiceService,
     private rota: ActivatedRoute,
     private r: Router,
+    private persistenceService: AuthenticatedUserService,
     private dialog: MatDialog) {
 
       this.convidado.id = 0;
@@ -62,7 +64,9 @@ export class DetalhesEventoComponent implements OnInit {
       this.codigo = params['id'];
     });
 
-    this.service.getEvento(this.codigo)
+    let authenticatedUser = this.persistenceService.getUser("loggedUser");
+
+    this.callApi.getEvento(authenticatedUser.userName, this.codigo)
     .subscribe(event => { 
       console.log(event);
       this.event = event
@@ -78,7 +82,7 @@ export class DetalhesEventoComponent implements OnInit {
 
 
   deletar(guest: Convidado) {
-    this.service.deleteConvidado(guest.id)
+    this.callApi.deleteConvidado(guest.id)
     .subscribe(event => this.event = event,
     msgError => this.msgError = <any>msgError);
   
@@ -92,7 +96,7 @@ export class DetalhesEventoComponent implements OnInit {
   
   adicionar() {
 
-    let retorno = this.service.postCadastraConvidados(this.codigo, this.convidado);
+    let retorno = this.callApi.postCadastraConvidados(this.codigo, this.convidado);
 
     if (retorno == 404) {
       this.openLoginForm();
