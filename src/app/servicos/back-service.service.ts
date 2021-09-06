@@ -8,6 +8,7 @@ import { ProcessHTTPMsgService } from './process-httpmsg.service';
 import { Evento } from '../models/evento';
 import { Convidado } from '../models/Convidado';
 import { TokenResponse } from '../models/tokenResponse';
+import { Usuario } from '../models/usuario';
 
 
 const httpOptions = {
@@ -47,10 +48,8 @@ export class BackServiceService {
     })
     .pipe(map(user => {
       return user;
-    }))
-    .pipe(catchError(this.httpServiceErrorHandler.handleError));
+    }));
   }
-
 
 
 

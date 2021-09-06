@@ -41,12 +41,6 @@ export class LandingComponent implements OnInit, OnDestroy {
   }
 
 
-  openMainPage() {
-    this.router.navigate(['/externalRedirect', { externalUrl: 'https://localhost:8443/myapp/oauth2/authorization/eventoas' }]);
-  }
-
-
-
   openLoginDialog(): void {
 
     dialogConfig.data = "LOGIN";

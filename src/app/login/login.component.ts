@@ -83,10 +83,6 @@ export class LoginComponent implements OnInit {
 
       } else {
 
-        console.log("REALIZAR LOGIN!");
-        console.log("USERNAME: " + userName);
-        console.log("PASSWORD: " + password);
-
         this.persistenceService.removeUser("loggedUser");
 
         this.callApi.postLogaUsuario(userName, password)
@@ -99,20 +95,18 @@ export class LoginComponent implements OnInit {
   
         }, errorResponse => {
 
-          console.log("DEU ERROR NO LOGIN!");
-          console.log(errorResponse);
+          if (errorResponse.status == 404) {
 
-          this.msgError = errorResponse.statusText;
-          this.exchangeData.setFlag(false);
-          this.resetForm();
+            this.msgError = errorResponse.statusText;
+            this.exchangeData.setFlag(false);
+            this.resetForm();
+
+          } else {
+
+            this.router.navigate(['/externalRedirect', { externalUrl: 'https://localhost:8443/myapp/oauth2/authorization/eventoas' }]);
+          }
         }
         );
-
-       setTimeout (() => {
-        this.router.navigate(['/externalRedirect', { externalUrl: 'http://localhost:8080/myapp/oauth2/authorization/eventoas' }]);
-      }, 1000);
-
-
       }
     }
 
@@ -133,7 +127,6 @@ export class LoginComponent implements OnInit {
     
 
     logarComGoogle() {
-      //this.router.navigate(['/externalRedirect', { externalUrl: 'http://localhost:8080/myapp/oauth2/authorization/google' }]);
-      this.router.navigate(['/externalRedirect', { externalUrl: 'https://localhost:8443/myapp/login/oauth2/code/eventoas' }]);
+      this.router.navigate(['/externalRedirect', { externalUrl: 'http://localhost:8080/myapp/oauth2/authorization/google' }]);
     }
 }
