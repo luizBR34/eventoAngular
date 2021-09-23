@@ -11,17 +11,14 @@ export class AuthInterceptorService implements HttpInterceptor {
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
         if ((this.authenticatedUser.getUser("loggedUser") == null) || (!this.authenticatedUser.getUser("loggedUser").userName)) {
-            console.log("NENHUM USUARIO AUTHENTICADO:");
+            console.log("Nobody was authenticated!");
             return next.handle(req);
         }
 
         let user = this.authenticatedUser.getUser("loggedUser");
-        console.log("DADOS DO USUARIO:");
-        console.log(user);
 
         const modifiedRequest = req.clone({
             headers: req.headers.append('Authorization', user.token)
-            //withCredentials: true
         });
 
 /*          const modifiedRequest02 = req.clone({
@@ -31,7 +28,6 @@ export class AuthInterceptorService implements HttpInterceptor {
         return next.handle(modifiedRequest)
         .pipe(tap(event => {
             if (event.type === HttpEventType.Response) {
-                console.log("Resposta chegou! Corpo: ");
                 console.log(event.body);
             }
         }));

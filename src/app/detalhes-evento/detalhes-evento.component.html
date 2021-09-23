@@ -38,7 +38,7 @@
       <tr *ngFor="let convidado of convidados">
 			<td><span> {{convidado.guestName}} </span></td>
 			<td><span> {{convidado.id}} </span></td>
-			<td><a [routerLink]="['/detalhesEvento', convidado.evento.code ]" routerLinkActive='active' (click)="deletar(convidado)"><i class="material-icons left">delete</i></a></td>
+			<td><a [routerLink]="['/detalhesEvento', event.code ]" routerLinkActive='active' (click)="deletar(convidado)"><i class="material-icons left">delete</i></a></td>
 	  </tr>
 	</tbody>
 </table> 

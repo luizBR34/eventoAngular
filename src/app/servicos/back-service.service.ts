@@ -8,7 +8,6 @@ import { ProcessHTTPMsgService } from './process-httpmsg.service';
 import { Evento } from '../models/evento';
 import { Convidado } from '../models/Convidado';
 import { TokenResponse } from '../models/tokenResponse';
-import { Usuario } from '../models/usuario';
 
 
 const httpOptions = {
@@ -132,32 +131,39 @@ export class BackServiceService {
   }
 
 
-  getListaConvidados(codigo: number): Observable<Convidado[]> {
-    const url = `${baseURL}/guestList/${codigo}`;
-    return this.http.get<Convidado[]>(url)
-    .pipe(retry(3), catchError(this.httpServiceErrorHandler.handleError));
+  getListaConvidados(username: string, codigo: number): Observable<Convidado[]> {
+    const url = `${baseURL}/guestList/`;
+
+    const OPTIONS = {
+      headers: new HttpHeaders({
+          'Content-Type': 'application/json'
+      }),
+      params: new HttpParams().append('username', username)
+                              .append('eventCode', codigo.toString())
+  };
+
+    return this.http.get<Convidado[]>(url, OPTIONS)
+    .pipe(catchError(this.httpServiceErrorHandler.handleError));
   }
 
 
-  postCadastraConvidados(codEvento: number, convidado: Convidado): number {
+  postCadastraConvidados(username: string, eventCode: number, guest: Convidado): Observable<HttpEvent<void>> {
 
-    let cod_retorno: number;
+    const url = `${baseURL}/saveGuest/`;
 
-    const url = `${baseURL}/cadastrarConvidado/${codEvento}`;
-    this.http.post(url, convidado, {observe: 'response'})
-    .subscribe(response => {
-      this.resposta_Grava_Convidado = response.status;
-      }, 
-      error => {
-        if(error.status == 404)
-        this.resposta_Grava_Convidado = error.status;
+    return this.http.post<void>(url, guest, {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json'}),
+      params: new HttpParams().append('username', username)
+                              .append('eventCode', eventCode.toString()),
+      observe: 'events'
       }
-    );
-
-    cod_retorno = this.resposta_Grava_Convidado;
-    return cod_retorno
+    ).pipe(tap(event => {
+      if (event.type === HttpEventType.Sent) {
+        console.log("Guest was successfully sent to the server!");
+      }
+    })
+   );
   }
-
 
 
   deleteConvidado(id: number): Observable<Evento> {

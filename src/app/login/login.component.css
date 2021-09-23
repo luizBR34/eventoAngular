@@ -38,3 +38,35 @@ fieldset {
  .tp-margin {
     margin: 0 10px;
  }
+
+
+ #customBtn {
+    display: inline-block;
+    background: #26a69a;
+    color: white;
+    width: 190px;
+    border-radius: 5px;
+    border: thin solid #888;
+    box-shadow: 1px 1px 1px grey;
+    white-space: nowrap;
+  }
+  #customBtn:hover {
+    cursor: pointer;
+  }
+  span.icon {
+    background: url('https://cdn1.iconfinder.com/data/icons/google-s-logo/150/Google_Icons-09-48.png') transparent 3px 50% white;
+    display: inline-block;
+    vertical-align: middle;
+    width: 50px;
+    height: 42px;
+  }
+  span.buttonText {
+    display: inline-block;
+    vertical-align: middle;
+    padding-left: 10px;
+    padding-right: 42px;
+    font-size: 14px;
+    font-weight: bold;
+    font-family: 'Roboto', sans-serif;
+  }
+

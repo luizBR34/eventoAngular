@@ -7,6 +7,7 @@ import { MatDialog } from '@angular/material'; // --> USADO PARA DIALOGO
 import { LoginComponent } from '../login/login.component';// --> USADO PARA DIALOGO
 import { dialogConfig } from '../shared/dialogConfig';
 import { AuthenticatedUserService } from '../servicos/authenticated-user.service';
+import { Usuario } from '../models/usuario';
 
 
 @Component({
@@ -16,14 +17,15 @@ import { AuthenticatedUserService } from '../servicos/authenticated-user.service
 })
 export class DetalhesEventoComponent implements OnInit {
 
-  event: Evento;
-  convidados: Convidado[];
+  event: Evento = new Evento();
+  user: Usuario = null;
+  convidados: Convidado[] = [];
+  convidado = new Convidado();
   msgError: string;
   codigo: number; 
 
   @ViewChild('cadastraConvidadoForm') convidadoFormDirective; 
 
-  convidado = new Convidado();
 
   navigationSubscription;
 
@@ -33,51 +35,45 @@ export class DetalhesEventoComponent implements OnInit {
     private persistenceService: AuthenticatedUserService,
     private dialog: MatDialog) {
 
-      this.convidado.id = 0;
-      this.convidado.guestName = '';
-
       this.navigationSubscription = this.r.events.subscribe((e: any) => {
-        // If it is a NavigationEnd event re-initalise the component
         if (e instanceof NavigationEnd) {
-          //this.atualizaListaConvidados();
+          this.atualizaListaConvidados();
         }
       });
 
     }
 
 
-/*     atualizaListaConvidados() {
+  atualizaListaConvidados() {
 
-      setTimeout (() => {
-        this.service.getListaConvidados(this.event.code)
-        .subscribe((convidados) => this.convidados = convidados,
-        msgError => this.msgError = <any>msgError);
-      }, 500);
-
-    } */
+    if ((this.user != null) && (this.event != null)) {
+      this.callApi.getListaConvidados(this.user.userName, this.event.code)
+      .subscribe((convidados) => this.convidados = convidados,
+      msgError => this.msgError = <any>msgError);
+    } else {
+      console.log("ERROR: Unable to get the guest list!");
+    }
+  }
 
   ngOnInit() {
     
-    this.event = new Evento();
-
     this.rota.params.subscribe(params => {
       this.codigo = params['id'];
     });
 
-    let authenticatedUser = this.persistenceService.getUser("loggedUser");
+    this.user = this.persistenceService.getUser("loggedUser");
 
-    this.callApi.getEvento(authenticatedUser.userName, this.codigo)
-    .subscribe(event => { 
-      console.log(event);
-      this.event = event
+    this.callApi.getEvento(this.user.userName, this.codigo)
+    .subscribe(response => { 
+      this.event = response;
+      this.convidado.event = response;
+      this.atualizaListaConvidados();
     }, errorResponse => { 
         this.msgError = errorResponse.message;
         console.log(errorResponse);
       }
     );
 
-
-    //this.atualizaListaConvidados();
   }
 
 
@@ -96,23 +92,23 @@ export class DetalhesEventoComponent implements OnInit {
   
   adicionar() {
 
-    let retorno = this.callApi.postCadastraConvidados(this.codigo, this.convidado);
-
-    if (retorno == 404) {
-      this.openLoginForm();
-    } else {
+    this.callApi.postCadastraConvidados(this.user.userName, this.codigo, this.convidado)
+    .subscribe(() => {
       this.dialog.closeAll();
-    }
-    
-    this.convidadoFormDirective.resetForm();
+      //this.atualizaListaConvidados();
+    }, error => {
+      this.openLoginForm();
+      console.log("An Error occour when to get response from server!");
+    });
 
-    //this.atualizaListaConvidados();
+    this.convidadoFormDirective.resetForm();    
   }
 
 
 
   openLoginForm(): void {
 
+    dialogConfig.data = "GET_TOKEN";
     let dialogRef = this.dialog.open(LoginComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(
