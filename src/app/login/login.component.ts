@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild, Inject } from '@angular/core';
 import { MatDialogRef } from "@angular/material";
 import { FormBuilder, FormGroup, Validators, NgForm } from '@angular/forms';
 import { BackServiceService } from '../servicos/back-service.service';
+import { HostNameService } from '../servicos/host-name.service';
 import { Usuario } from '../models/usuario';
 import { Router } from '@angular/router';
 import { HttpResponse } from '@angular/common/http';
@@ -29,6 +30,7 @@ export class LoginComponent implements OnInit {
     private callApi: BackServiceService,
     private exchangeData: ExchangeDataService,
     private persistenceService: AuthenticatedUserService,
+    private hostNameService: HostNameService,
     private router: Router,
     @Inject(MAT_DIALOG_DATA) public dialogData: any) {
     this.description = "Por favor se indentifique primeiro";
@@ -103,7 +105,8 @@ export class LoginComponent implements OnInit {
 
           } else {
 
-            this.router.navigate(['/externalRedirect', { externalUrl: 'https://localhost:8443/myapp/oauth2/authorization/eventoas' }]);
+            //this.router.navigate(['/externalRedirect', { externalUrl: 'https://localhost:8443/myapp/oauth2/authorization/eventoas' }]);
+            this.router.navigate(['/externalRedirect', { externalUrl: this.hostNameService.getEventoAppHost() + '/oauth2/authorization/eventoas' }]);
           }
         }
         );
@@ -127,6 +130,7 @@ export class LoginComponent implements OnInit {
     
 
     logarComGoogle() {
-      this.router.navigate(['/externalRedirect', { externalUrl: 'http://localhost:8080/myapp/oauth2/authorization/google' }]);
+      //this.router.navigate(['/externalRedirect', { externalUrl: 'https://localhost:8443/myapp/oauth2/authorization/google' }]);
+      this.router.navigate(['/externalRedirect', { externalUrl: this.hostNameService.getEventoAppHost() + '/oauth2/authorization/google' }]);
     }
 }

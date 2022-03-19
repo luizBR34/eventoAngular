@@ -5,7 +5,10 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'; //RE
 
 import { BackServiceService } from './servicos/back-service.service';
 import { ProcessHTTPMsgService } from './servicos/process-httpmsg.service';
-import { baseURL, baseURL2 } from './shared/baseurl';
+
+import { WINDOW_PROVIDERS } from './shared/window.providers';
+
+import { HostNameService } from './servicos/host-name.service';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -70,8 +73,8 @@ import { AuthenticatedUserService } from './servicos/authenticated-user.service'
     ProcessHTTPMsgService,
     ExchangeDataService,
     AuthenticatedUserService,
-    { provide: 'baseURL', useValue: baseURL },
-    { provide: 'baseURL2', useValue: baseURL2 },
+    WINDOW_PROVIDERS,
+    HostNameService,
     {
       provide: HTTP_INTERCEPTORS, 
       useClass: AuthInterceptorService, 

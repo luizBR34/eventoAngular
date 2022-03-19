@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Evento } from '../models/evento';
-import { Convidado } from '../models/Convidado';
+import { Convidado } from '../models/convidado';
 import { BackServiceService } from '../servicos/back-service.service';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { MatDialog } from '@angular/material'; // --> USADO PARA DIALOGO

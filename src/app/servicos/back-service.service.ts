@@ -1,12 +1,12 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 import { HttpClient, HttpParams, HttpEventType, HttpUserEvent, HttpEvent, HttpResponse } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
-import { baseURL, baseURL2, baseURL3 } from '../shared/baseurl';
+import { HostNameService } from './host-name.service';
 import { Observable } from 'rxjs';
 import { catchError, retry, map, tap, } from 'rxjs/operators';
 import { ProcessHTTPMsgService } from './process-httpmsg.service';
 import { Evento } from '../models/evento';
-import { Convidado } from '../models/Convidado';
+import { Convidado } from '../models/convidado';
 import { TokenResponse } from '../models/tokenResponse';
 
 
@@ -25,15 +25,15 @@ export class BackServiceService {
   resposta_Grava_Convidado: number;
 
   constructor(private http: HttpClient,
-              private httpServiceErrorHandler: ProcessHTTPMsgService) {
+              private httpServiceErrorHandler: ProcessHTTPMsgService,
+              private hostNameService: HostNameService) {
       this.resposta_Grava_Convidado = 200;
   }
 
 
-
   postLogaUsuario(username: string, password: string): Observable<HttpResponse<any>> {
 
-    const url = `${baseURL3}/logar/`;
+    const url = this.hostNameService.getEventoASHost() + `/logar/`;
 
     const params = new HttpParams()
     .set('username', username)
@@ -54,7 +54,7 @@ export class BackServiceService {
 
   getToken(username: string, password: string): Observable<TokenResponse> {
 
-    const url = `${baseURL3}/oauth/token`;
+    const url = this.hostNameService.getEventoASHost() + `/oauth/token`;
 
     const params = new HttpParams()
     .set('grant_type', 'password')
@@ -72,7 +72,8 @@ export class BackServiceService {
 
 
   getEventos(username: string): Observable<Evento[]> {
-    const url = `${baseURL}/events/` + username;
+
+    const url = this.hostNameService.getEventoRSHost() + `/events/` + username;
     return this.http.get<Evento[]>(url,
       { 
         headers: new HttpHeaders({ 'content-type' : 'application/json' })
@@ -88,7 +89,8 @@ export class BackServiceService {
   }
 
   getEvento(username: string, codigo: number): Observable<Evento> {
-    const url = `${baseURL}/seekEvent/${codigo}/`;
+
+    const url = this.hostNameService.getEventoRSHost() + `/seekEvent/${codigo}/`;
     return this.http.get<Evento>(url,
       { 
         headers: new HttpHeaders({ 'username' : username })
@@ -97,7 +99,8 @@ export class BackServiceService {
   }
 
   postCadastraEvento(username: string, evento: Evento): Observable<HttpEvent<void>> {
-    const url = `${baseURL}/saveEvent/`;
+
+    const url = this.hostNameService.getEventoRSHost() + `/saveEvent/`;
 
     return this.http.post<void>(url, evento,
       { 
@@ -116,7 +119,7 @@ export class BackServiceService {
 
   deleteEvento(username: string, codigo: number): Observable<HttpEvent<void>> {
 
-      const url = `${baseURL}/deleteEvent/${codigo}`;
+      const url = this.hostNameService.getEventoRSHost() + `/deleteEvent/${codigo}`;
       return this.http.delete<void>(url, 
         {
           headers: new HttpHeaders({ 'username' : username }), 
@@ -132,7 +135,8 @@ export class BackServiceService {
 
 
   getListaConvidados(username: string, codigo: number): Observable<Convidado[]> {
-    const url = `${baseURL}/guestList/`;
+
+    const url = this.hostNameService.getEventoRSHost() + `/guestList/`;
 
     const OPTIONS = {
       headers: new HttpHeaders({
@@ -149,7 +153,7 @@ export class BackServiceService {
 
   postCadastraConvidados(username: string, eventCode: number, guest: Convidado): Observable<HttpEvent<void>> {
 
-    const url = `${baseURL}/saveGuest/`;
+    const url = this.hostNameService.getEventoRSHost() + `/saveGuest/`;
 
     return this.http.post<void>(url, guest, {
       headers: new HttpHeaders({ 'Content-Type': 'application/json'}),
@@ -167,7 +171,8 @@ export class BackServiceService {
 
 
   deleteConvidado(id: number): Observable<Evento> {
-    const url = `${baseURL}/deletarConvidado/${id}`;
+ 
+    const url = this.hostNameService.getEventoRSHost() + `/deleteGuest/${id}`;
     return this.http.delete<Evento>(url, httpOptions)
     .pipe(catchError(this.httpServiceErrorHandler.handleError));
   }
